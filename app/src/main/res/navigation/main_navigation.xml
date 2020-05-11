@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/catalog_fragment">
+
+    <fragment
+        android:id="@+id/catalog_fragment"
+        android:name="edu.yuferov.shop.app.fragment.CatalogFragment"
+        android:label="@string/title_catalog"
+        tools:layout="@layout/fragment_catalog">
+        <action
+            android:id="@+id/action_catalog_fragment_to_product_list_fragment"
+            app:destination="@id/product_list_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cart_fragment"
+        android:name="edu.yuferov.shop.app.fragment.CartFragment"
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cart_fragment_to_checkout_form_fragment"
+            app:destination="@id/checkout_form_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/product_list_fragment"
+        android:name="edu.yuferov.shop.app.fragment.ProductListFragment"
+        android:label="@string/title_products"
+        tools:layout="@layout/fragment_product_list" >
+        <argument
+            android:name="categoryId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_product_list_fragment_to_product_details_fragment"
+            app:destination="@id/product_details_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/product_details_fragment"
+        android:name="edu.yuferov.shop.app.fragment.ProductDetailFragment"
+        android:label="@string/title_product_details"
+        tools:layout="@layout/fragment_product_detail">
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkout_form_fragment"
+        android:name="edu.yuferov.shop.app.fragment.CheckoutFormFragment"
+        android:label="@string/title_checkout_form"
+        tools:layout="@layout/fragment_checkout_form">
+        <action
+            android:id="@+id/action_checkout_form_fragment_to_checkout_success_fragment"
+            app:destination="@id/checkout_success_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkout_success_fragment"
+        android:name="edu.yuferov.shop.app.fragment.CheckoutSuccessFragment"
+        android:label="@string/title_checkout_success"
+        tools:layout="@layout/fragment_checkout_success" />
+</navigation>

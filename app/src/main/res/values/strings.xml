@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Книжный магазин</string>
+    <string name="title_catalog">Каталог</string>
+    <string name="title_cart">Корзина</string>
+    <string name="title_products">Продукты</string>
+    <string name="title_product_details">Информация о товаре</string>
+    <string name="title_checkout_form">Оформление заказа</string>
+    <string name="title_checkout_success">Заказ оформлен</string>
+    <string name="fragment_catalog_iv_status_description">Статус загрузки списка категорий</string>
+    <string name="loading_status">Идет загрузка</string>
+    <string name="loading_error_status">Произошла ошибка при загрузке</string>
+    <string name="list_item_product_thumbnail_description">Миниатюра</string>
+    <string name="template_price">%1$f &#8381;</string>
+    <string name="fragment_product_detail_tv_descr_title">Описание</string>
+    <string name="fragment_product_detail_iv_image_descr">Фотография продукта</string>
+    <string name="add_to_cart">В корзину</string>
+</resources>
