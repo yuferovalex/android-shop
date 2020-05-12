@@ -14,4 +14,17 @@
     <string name="fragment_product_detail_tv_descr_title">Описание</string>
     <string name="fragment_product_detail_iv_image_descr">Фотография продукта</string>
     <string name="add_to_cart">В корзину</string>
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
+    <string name="middle_name">Отчество</string>
+    <string name="phone">Телефон</string>
+    <string name="checkout_buyer_block_title">Покупатель</string>
+    <string name="checkout_payment_block_title">Оплата</string>
+    <string name="checkout_payment_cash">Наличными</string>
+    <string name="checkout_payment_card">Банковской картой</string>
+    <string name="checkout_total_title">Сумма к оплате</string>
+    <string name="checkout_total_goods">Товары</string>
+    <string name="checkout_total_discount">Скидка</string>
+    <string name="checkout_total_sum">Итого</string>
+    <string name="checkout_do_checkout_btn">Оформить заказ</string>
 </resources>

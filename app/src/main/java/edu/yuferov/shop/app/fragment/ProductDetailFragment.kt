@@ -70,10 +70,7 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView {
         attributes.layoutManager = LinearLayoutManager(context)
 
         addToCartBtn = root.findViewById(R.id.fragment_product_detail_btn_add_to_cart)
-        addToCartBtn.setOnClickListener {
-            presenter.onAddToCartClicked()
-        }
-
+        addToCartBtn.setOnClickListener { presenter.onAddToCartClicked() }
 
         return root
     }

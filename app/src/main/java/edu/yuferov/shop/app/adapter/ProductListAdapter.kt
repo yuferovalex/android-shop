@@ -6,14 +6,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import edu.yuferov.shop.R
-import edu.yuferov.shop.domain.Category
 import edu.yuferov.shop.domain.Product
-import edu.yuferov.shop.util.EndlessRecyclerViewScrollListener
 import edu.yuferov.shop.util.formatPrice
 import edu.yuferov.shop.util.loadImage
 
