@@ -3,6 +3,7 @@ package edu.yuferov.shop.app
 import android.app.Application
 import edu.yuferov.shop.app.di.AppComponent
 import edu.yuferov.shop.app.di.DaggerAppComponent
+import edu.yuferov.shop.app.di.MainModule
 
 class App : Application() {
     override fun onCreate() {
@@ -12,7 +13,7 @@ class App : Application() {
 
     private fun initDagger() {
         appComponent = DaggerAppComponent.builder()
-            // .context(this)
+            .mainModule(MainModule(this))
             .build()
     }
 

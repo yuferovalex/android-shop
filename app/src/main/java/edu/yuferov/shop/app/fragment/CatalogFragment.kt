@@ -22,15 +22,13 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class CatalogFragment : MvpAppCompatFragment(), ICatalogView {
+class CatalogFragment : MvpAppCompatFragment(), ICatalogView, IHasNetworkStatusMixin {
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
 
+    override lateinit var status: NetworkStatusFragment
     private lateinit var scrollView: ScrollView
-    private lateinit var status: View
-    private lateinit var statusIcon: ImageView
-    private lateinit var statusText: TextView
     private lateinit var listItemAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +42,7 @@ class CatalogFragment : MvpAppCompatFragment(), ICatalogView {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_catalog, container, false)
-        status = root.findViewById(R.id.fragment_catalog_status)
-        statusIcon = status.findViewById(R.id.fragment_status_iv_icon)
-        statusText = status.findViewById(R.id.fragment_status_tv_description)
+        status = childFragmentManager.findFragmentById(R.id.fragment_catalog_status) as NetworkStatusFragment
         scrollView = root.findViewById(R.id.fragment_catalog_sv_scrol)
 
         listItemAdapter = CategoryAdapter()
@@ -62,19 +58,9 @@ class CatalogFragment : MvpAppCompatFragment(), ICatalogView {
     }
 
     override fun bind(categories: List<Category>) {
-        status.visibility = View.GONE
+        status.status = NetworkStatusFragment.Status.Loaded
         scrollView.visibility = View.VISIBLE
         listItemAdapter.data = categories
-    }
-
-    override fun showLoadingStatus() {
-        statusIcon.setImageResource(R.drawable.loading_animation)
-        statusText.text = getString(R.string.loading_status)
-    }
-
-    override fun showLoadErrorStatus() {
-        statusIcon.setImageResource(R.drawable.ic_error_outline_black_24dp)
-        statusText.text = getString(R.string.loading_error_status)
     }
 
     override fun navigateToCategory(categoryId: Int) {

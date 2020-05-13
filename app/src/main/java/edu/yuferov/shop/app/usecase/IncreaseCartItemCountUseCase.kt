@@ -1,14 +1,12 @@
 package edu.yuferov.shop.app.usecase
 
+import edu.yuferov.shop.data.repository.CartRepository
 import javax.inject.Inject
 
 class IncreaseCartItemCountUseCase @Inject constructor(
-
+    private val repository: CartRepository
 ) {
-    @Suppress("UNUSED_PARAMETER")
-    suspend operator fun invoke(productId: Int) {
-        // TODO: Implement me
-        // cart.items.find { it.id === productId }?.count += 1
-        // repo.increaseItemsCount(productId, newCount)
+    operator fun invoke(productId: Int) {
+        repository.increaseCount(productId)
     }
 }

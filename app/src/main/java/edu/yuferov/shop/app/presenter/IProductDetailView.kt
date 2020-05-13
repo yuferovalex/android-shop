@@ -5,13 +5,8 @@ import moxy.MvpView
 import moxy.viewstate.strategy.SingleStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface IProductDetailView : MvpView {
-    @StateStrategyType(SingleStateStrategy::class)
-    fun showLoadingStatus()
-
-    @StateStrategyType(SingleStateStrategy::class)
-    fun showLoadErrorStatus()
-
+@StateStrategyType(SingleStateStrategy::class)
+interface IProductDetailView : MvpView, IHasNetworkStatusView {
     @StateStrategyType(SingleStateStrategy::class)
     fun bind(product: Product)
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.delay
 import java.util.stream.Collectors
 import java.util.stream.IntStream
 
-class MainRepositoryImpl : IMainRepository {
+class MainRepositoryImpl : MainApi {
 
     val img =
         Uri.parse("https://w0.pngwave.com/png/155/611/artist-s-book-scalable-graphics-gray-books-s-png-clip-art-thumbnail.png")

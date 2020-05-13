@@ -7,10 +7,8 @@ import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(SingleStateStrategy::class)
-interface ICatalogView : MvpView {
+interface ICatalogView : MvpView, IHasNetworkStatusView {
     fun bind(categories: List<Category>)
-    fun showLoadingStatus()
-    fun showLoadErrorStatus()
 
     @StateStrategyType(SkipStrategy::class)
     fun navigateToCategory(categoryId: Int)

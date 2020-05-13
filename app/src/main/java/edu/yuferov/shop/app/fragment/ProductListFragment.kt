@@ -20,7 +20,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class ProductListFragment : MvpAppCompatFragment(), IProductListView {
+class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetworkStatusMixin {
     @Inject
     lateinit var presenterProvider: ProductListPresenter.Fabric
     private val presenter by moxyPresenter {
@@ -28,11 +28,9 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView {
         presenterProvider.create(args.categoryId)
     }
 
+    override lateinit var status: NetworkStatusFragment
     private lateinit var itemListAdapter: ProductListAdapter
     private lateinit var scrollView: ScrollView
-    private lateinit var status: View
-    private lateinit var statusText: TextView
-    private lateinit var statusIcon: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -45,9 +43,8 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_product_list, container, false)
-        status = root.findViewById(R.id.fragment_product_list_status)
-        statusIcon = status.findViewById(R.id.fragment_status_iv_icon)
-        statusText = status.findViewById(R.id.fragment_status_tv_description)
+        status =
+            childFragmentManager.findFragmentById(R.id.fragment_product_list_status) as NetworkStatusFragment
 
         scrollView = root.findViewById(R.id.fragment_product_list_sv_scroll)
 
@@ -71,18 +68,8 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView {
 
     override fun bind(data: List<Product>) {
         itemListAdapter.data = data
-        status.visibility = View.GONE
+        status.status = NetworkStatusFragment.Status.Loaded
         scrollView.visibility = View.VISIBLE
-    }
-
-    override fun showLoadingStatus() {
-        statusIcon.setImageResource(R.drawable.loading_animation)
-        statusText.text = getString(R.string.loading_status)
-    }
-
-    override fun showLoadErrorStatus() {
-        statusIcon.setImageResource(R.drawable.ic_error_outline_black_24dp)
-        statusText.text = getString(R.string.loading_error_status)
     }
 
     override fun navigateToProductDetails(productId: Int) {

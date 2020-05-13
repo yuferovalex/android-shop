@@ -1,7 +1,7 @@
 package edu.yuferov.shop.app.presenter
 
 import android.util.Log
-import edu.yuferov.shop.data.repository.IMainRepository
+import edu.yuferov.shop.data.repository.MainApi
 import edu.yuferov.shop.domain.Category
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @InjectViewState
 class CatalogPresenter @Inject constructor(
-    private val repository: IMainRepository
+    private val repository: MainApi
 ) : MvpPresenter<ICatalogView>() {
 
     init {

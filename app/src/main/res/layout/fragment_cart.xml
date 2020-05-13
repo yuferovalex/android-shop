@@ -10,10 +10,12 @@
         android:id="@+id/fragment_cart_sv_scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fragment_cart_btn_checkout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,9 +31,9 @@
                 tools:itemCount="4"
                 tools:listitem="@layout/list_item_cart_item" />
 
-            <include
+            <fragment
                 android:id="@+id/fragment_cart_total_sum"
-                layout="@layout/fragment_total_sum"
+                android:name="edu.yuferov.shop.app.fragment.TotalSumFragment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -46,9 +48,22 @@
         android:id="@+id/fragment_cart_btn_checkout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Перейти к оформлению : 998 Р" />
+        tools:text="Перейти к оформлению : 998 Р"
+        tools:visibility="visible" />
+
+    <fragment
+        android:id="@+id/fragment_cart_status"
+        android:name="edu.yuferov.shop.app.fragment.NetworkStatusFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

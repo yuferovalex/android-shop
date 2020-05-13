@@ -1,14 +1,12 @@
 package edu.yuferov.shop.app.usecase
 
+import edu.yuferov.shop.data.repository.CartRepository
 import javax.inject.Inject
 
 class RemoveCartItemUseCase @Inject constructor(
-
+    private val repository: CartRepository
 ) {
-    @Suppress("UNUSED_PARAMETER")
-    suspend operator fun invoke(productId: Int) {
-        // TODO: Implement me
-        // cart.items.remove { it.id === productId }
-        // repo.remove(productId)
+    operator fun invoke(productId: Int) {
+        repository.remove(productId)
     }
 }

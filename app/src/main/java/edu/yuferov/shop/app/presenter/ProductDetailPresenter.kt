@@ -2,7 +2,7 @@ package edu.yuferov.shop.app.presenter
 
 import android.util.Log
 import edu.yuferov.shop.app.usecase.AddToCartUseCase
-import edu.yuferov.shop.data.repository.IMainRepository
+import edu.yuferov.shop.data.repository.MainApi
 import edu.yuferov.shop.domain.Product
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -12,13 +12,13 @@ import javax.inject.Inject
 
 @InjectViewState
 class ProductDetailPresenter(
-    private val repository: IMainRepository,
+    private val repository: MainApi,
     private val addToCart: AddToCartUseCase,
     productId: Int
 ) : MvpPresenter<IProductDetailView>() {
 
     class Fabric @Inject constructor(
-        private val repository: IMainRepository,
+        private val repository: MainApi,
         private val addToCart: AddToCartUseCase
     ) {
         fun create(productId: Int) = ProductDetailPresenter(repository, addToCart, productId)
@@ -44,7 +44,5 @@ class ProductDetailPresenter(
         }
     }
 
-    fun onAddToCartClicked() {
-        addToCart(product)
-    }
+    fun onAddToCartClicked() = addToCart(product)
 }

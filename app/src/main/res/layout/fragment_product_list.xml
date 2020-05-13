@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".app.fragment.ProductListFragment">
 
-    <include
+    <fragment
         android:id="@+id/fragment_product_list_status"
-        layout="@layout/fragment_status"
+        android:name="edu.yuferov.shop.app.fragment.NetworkStatusFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

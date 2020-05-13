@@ -14,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.yuferov.shop.R
 import edu.yuferov.shop.app.App
 import edu.yuferov.shop.app.adapter.ProductAttributeAdapter
+import edu.yuferov.shop.app.presenter.IHasNetworkStatusView
 import edu.yuferov.shop.app.presenter.IProductDetailView
 import edu.yuferov.shop.app.presenter.ProductDetailPresenter
 import edu.yuferov.shop.domain.Product
-import edu.yuferov.shop.util.formatPrice
+import edu.yuferov.shop.util.bindPrice
 import edu.yuferov.shop.util.loadImage
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView {
+class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView, IHasNetworkStatusMixin {
     @Inject
     lateinit var presenterProvider: ProductDetailPresenter.Fabric
     private val presenter by moxyPresenter {
@@ -31,9 +32,7 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView {
         presenterProvider.create(args.productId)
     }
 
-    private lateinit var status: View
-    private lateinit var statusIcon: ImageView
-    private lateinit var statusText: TextView
+    override lateinit var status: NetworkStatusFragment
     private lateinit var image: ImageView
     private lateinit var price: TextView
     private lateinit var discountPrice: TextView
@@ -54,9 +53,8 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_product_detail, container, false)
 
-        status = root.findViewById(R.id.fragment_product_detail_status)
-        statusIcon = status.findViewById(R.id.fragment_status_iv_icon)
-        statusText = status.findViewById(R.id.fragment_status_tv_description)
+        status =
+            childFragmentManager.findFragmentById(R.id.fragment_product_detail_status) as NetworkStatusFragment
         scrollView = root.findViewById(R.id.fragment_product_detail_sv_scroll)
         image = root.findViewById(R.id.fragment_product_detail_iv_image)
         price = root.findViewById(R.id.fragment_product_detail_tv_price)
@@ -77,24 +75,13 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView {
 
     override fun bind(product: Product) {
         image.loadImage(product.image)
-        formatPrice(price, discountPrice, product)
+        bindPrice(price, discountPrice, product)
         title.text = product.title
         description.text = product.description
         productAttributesAdapter.data = product.attributes
 
-        status.visibility = View.GONE
+        status.status = NetworkStatusFragment.Status.Loaded
         scrollView.visibility = View.VISIBLE
         addToCartBtn.visibility = View.VISIBLE
-    }
-
-
-    override fun showLoadingStatus() {
-        statusIcon.setImageResource(R.drawable.loading_animation)
-        statusText.text = getString(R.string.loading_status)
-    }
-
-    override fun showLoadErrorStatus() {
-        statusIcon.setImageResource(R.drawable.ic_error_outline_black_24dp)
-        statusText.text = getString(R.string.loading_error_status)
     }
 }

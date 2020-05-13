@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import edu.yuferov.shop.R
 import edu.yuferov.shop.domain.Product
-import edu.yuferov.shop.util.formatPrice
+import edu.yuferov.shop.util.bindPrice
 import edu.yuferov.shop.util.loadImage
 
 class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>() {
@@ -48,7 +48,7 @@ class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ViewHolder>()
             title.text = model.title
             thumbnail.loadImage(model.thumbnail)
 
-            formatPrice(price, discountPrice, model)
+            bindPrice(price, discountPrice, model)
 
             itemView.setOnClickListener { onClickedListener?.onClick(model) }
             addToCartBtn.setOnClickListener { onAddToCardClickedListener?.onClick(model) }

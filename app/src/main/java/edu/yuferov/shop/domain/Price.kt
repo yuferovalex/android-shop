@@ -1,6 +1,6 @@
 package edu.yuferov.shop.domain
 
-class Price(
+data class Price(
     /**
      * Price in rubles.
      */
