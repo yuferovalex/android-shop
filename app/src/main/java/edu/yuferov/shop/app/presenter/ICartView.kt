@@ -6,8 +6,12 @@ import edu.yuferov.shop.domain.Price
 import moxy.MvpView
 import moxy.viewstate.strategy.*
 
-interface ICartView : MvpView, IHasNetworkStatusView {
-    @StateStrategyType(SingleStateStrategy::class)
+interface ICartView : IBaseView {
+    companion object {
+        const val QUANTITY_DIALOG_TAG = "QUANTITY_DIALOG_TAG"
+    }
+
+    @StateStrategyType(AddToEndSingleStrategy::class)
     fun setItems(cart: Cart)
 
     @StateStrategyType(AddToEndSingleStrategy::class)
@@ -30,12 +34,10 @@ interface ICartView : MvpView, IHasNetworkStatusView {
 
     @StateStrategyType(SkipStrategy::class)
     fun showItemRemovedMessage(index: Int, cartItem: CartItem)
-    companion object {
-        const val QUANTITY_DIALOG_TAG = "QUANTITY_DIALOG_TAG"
-    }
 
     @StateStrategyType(AddToEndSingleTagStrategy::class, tag = QUANTITY_DIALOG_TAG)
     fun showQuantityDialog(cartItem: CartItem, initialQuantity: Int)
+
     @StateStrategyType(AddToEndSingleTagStrategy::class, tag = QUANTITY_DIALOG_TAG)
     fun hideQuantityDialog()
 }

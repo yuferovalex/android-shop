@@ -15,7 +15,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class CheckoutSuccessFragment : MvpAppCompatFragment(), ICheckoutSuccessView {
+class CheckoutSuccessFragment : BaseFragment(), ICheckoutSuccessView {
     @Inject
     lateinit var presenterProvider: Provider<CheckoutSuccessPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }

@@ -15,9 +15,6 @@ class RepositoryModule {
         PreferenceManager.getDefaultSharedPreferences(context)
 
     @Provides
-    fun providesMainApi(): MainApi = MainRepositoryImpl()
-
-    @Provides
     fun providesCartRepository(sharedPreferences: SharedPreferences, api: MainApi): CartRepository =
         SharedPreferencesCartRepository(sharedPreferences, api)
 

@@ -9,5 +9,5 @@ import javax.inject.Singleton
 class MainModule(private val context: Context) {
     @Provides
     @Singleton
-    fun provideContext() = context
+    fun providesContext() = context
 }

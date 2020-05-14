@@ -1,12 +1,10 @@
 package edu.yuferov.shop.app.presenter
 
-import android.util.Log
 import edu.yuferov.shop.data.repository.CartRepository
 import edu.yuferov.shop.data.repository.MainApi
 import edu.yuferov.shop.domain.Product
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
-import moxy.MvpPresenter
 import moxy.presenterScope
 import javax.inject.Inject
 
@@ -15,11 +13,7 @@ class ProductListPresenter(
     private val api: MainApi,
     private val repository: CartRepository,
     private val categoryId: Int
-) : MvpPresenter<IProductListView>() {
-
-    init {
-        loadData()
-    }
+) : BasePresenter<IProductListView>() {
 
     class Fabric @Inject constructor(
         private val api: MainApi,
@@ -28,17 +22,10 @@ class ProductListPresenter(
         fun create(categoryId: Int) = ProductListPresenter(api, repository, categoryId)
     }
 
-    private fun loadData() = presenterScope.launch {
-        try {
-            viewState.showLoadingStatus()
+    init {
+        makeRequest {
             val pageData = api.loadProductsOfCategory(categoryId)
             viewState.bind(pageData)
-        } catch (throwable: Throwable) {
-            Log.e(
-                "Network error",
-                "An error occurred while loading product page: ${throwable.message}"
-            )
-            viewState.showLoadErrorStatus()
         }
     }
 

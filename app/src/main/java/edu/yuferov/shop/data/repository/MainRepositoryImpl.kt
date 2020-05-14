@@ -46,7 +46,7 @@ class MainRepositoryImpl : MainApi {
         return createProduct(productId)
     }
 
-    override suspend fun buyRequest(request: BuyRequest): Int {
+    override suspend fun createOrder(request: OrderRequest): Int {
         return 123456
     }
 

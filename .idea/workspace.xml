@@ -12,10 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0469e691-50a9-46e4-ab65-87fccc047679" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/SharedPreferencesUserInfoRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/UserInfoRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/domain/PaymentType.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/domain/UserInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_databinding_viewbinding_3_6_3_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/BaseFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/BasePresenter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/IBaseView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/fileHashes/fileHashes.bin" afterDir="false" />
@@ -26,17 +26,42 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.6.4/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/di/AppComponent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/di/AppComponent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/di/NetworkModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/di/NetworkModule.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/di/RepositoryModule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/di/RepositoryModule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CartFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CartFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CatalogFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CatalogFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CheckoutFormFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CheckoutFormFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CheckoutSuccessFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/CheckoutSuccessFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/IHasNetworkStatusMixin.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/ProductDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/ProductDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/ProductListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/fragment/ProductListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CartPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CartPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CatalogPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CatalogPresenter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CheckoutFormPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CheckoutFormPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CheckoutSuccessPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/CheckoutSuccessPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICartView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICartView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICatalogView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICatalogView.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICheckoutFormView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICheckoutFormView.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/CartRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/CartRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICheckoutSuccessView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ICheckoutSuccessView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/IHasNetworkStatusView.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/IProductDetailView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/IProductDetailView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/IProductListView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/IProductListView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ProductDetailPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ProductDetailPresenter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ProductListPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/app/presenter/ProductListPresenter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/MainApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/MainApi.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/MainRepositoryImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/MainRepositoryImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/SharedPreferencesCartRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/data/repository/SharedPreferencesCartRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/domain/BuyRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/domain/BuyRequest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/domain/BuyRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/edu/yuferov/shop/domain/OrderRequest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_cart.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_catalog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_catalog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_checkout_form.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_checkout_form.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_product_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_product_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_product_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_product_list.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589475388395</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="WIP day 4-2">
+      <created>1589480929235</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1589480929235</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,7 +267,8 @@
     <MESSAGE value="WIP day 2" />
     <MESSAGE value="WIP day 3" />
     <MESSAGE value="WIP day 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP day 4" />
+    <MESSAGE value="WIP day 4-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP day 4-2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

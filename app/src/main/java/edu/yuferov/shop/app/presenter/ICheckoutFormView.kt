@@ -8,10 +8,7 @@ import moxy.viewstate.strategy.SingleStateStrategy
 import moxy.viewstate.strategy.SkipStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface ICheckoutFormView : MvpView, IHasNetworkStatusView {
-    @StateStrategyType(SingleStateStrategy::class)
-    fun hideNetworkStatus()
-
+interface ICheckoutFormView : IBaseView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun setUserInfo(userInfo: UserInfo)
 

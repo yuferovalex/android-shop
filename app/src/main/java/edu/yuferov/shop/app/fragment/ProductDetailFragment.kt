@@ -4,27 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import edu.yuferov.shop.R
 import edu.yuferov.shop.app.App
 import edu.yuferov.shop.app.adapter.ProductAttributeAdapter
-import edu.yuferov.shop.app.presenter.IHasNetworkStatusView
 import edu.yuferov.shop.app.presenter.IProductDetailView
 import edu.yuferov.shop.app.presenter.ProductDetailPresenter
+import edu.yuferov.shop.databinding.FragmentProductDetailBinding
+import edu.yuferov.shop.databinding.FragmentProductDetailInnerBinding
 import edu.yuferov.shop.domain.Product
 import edu.yuferov.shop.util.bindPrice
 import edu.yuferov.shop.util.loadImage
-import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView, IHasNetworkStatusMixin {
+class ProductDetailFragment : BaseFragment(), IProductDetailView {
+
     @Inject
     lateinit var presenterProvider: ProductDetailPresenter.Fabric
     private val presenter by moxyPresenter {
@@ -32,15 +28,9 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView, IHasNe
         presenterProvider.create(args.productId)
     }
 
-    override lateinit var status: NetworkStatusFragment
-    private lateinit var image: ImageView
-    private lateinit var price: TextView
-    private lateinit var discountPrice: TextView
-    private lateinit var title: TextView
-    private lateinit var description: TextView
+    private lateinit var binding: FragmentProductDetailBinding
+    private lateinit var innerBinding: FragmentProductDetailInnerBinding
     private lateinit var productAttributesAdapter: ProductAttributeAdapter
-    private lateinit var scrollView: ScrollView
-    private lateinit var addToCartBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -48,41 +38,39 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView, IHasNe
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_product_detail, container, false)
+        binding = FragmentProductDetailBinding.inflate(inflater, container, false)
+        innerBinding = FragmentProductDetailInnerBinding.bind(binding.root)
 
-        status =
+        networkStatus =
             childFragmentManager.findFragmentById(R.id.fragment_product_detail_status) as NetworkStatusFragment
-        scrollView = root.findViewById(R.id.fragment_product_detail_sv_scroll)
-        image = root.findViewById(R.id.fragment_product_detail_iv_image)
-        price = root.findViewById(R.id.fragment_product_detail_tv_price)
-        discountPrice = root.findViewById(R.id.fragment_product_detail_tv_discount_price)
-        title = root.findViewById(R.id.fragment_product_detail_tv_title)
-        description = root.findViewById(R.id.fragment_product_detail_tv_description)
+        mainViewGroup = binding.fragmentProductDetailMainViewGroup
 
-        val attributes: RecyclerView = root.findViewById(R.id.fragment_product_detail_rv_attributes)
+        val attributes: RecyclerView = innerBinding.fragmentProductDetailRvAttributes
         productAttributesAdapter = ProductAttributeAdapter()
         attributes.adapter = productAttributesAdapter
         attributes.layoutManager = LinearLayoutManager(context)
         attributes.isNestedScrollingEnabled = false
 
-        addToCartBtn = root.findViewById(R.id.fragment_product_detail_btn_add_to_cart)
-        addToCartBtn.setOnClickListener { presenter.onAddToCartClicked() }
+        binding.fragmentProductDetailBtnAddToCart.setOnClickListener {
+            presenter.onAddToCartClicked()
+        }
 
-        return root
+        return binding.root
     }
 
     override fun bind(product: Product) {
-        image.loadImage(product.image)
-        bindPrice(price, discountPrice, product)
-        title.text = product.title
-        description.text = product.description
+        innerBinding.fragmentProductDetailIvImage.loadImage(product.image)
+        bindPrice(
+            innerBinding.fragmentProductDetailTvPrice,
+            innerBinding.fragmentProductDetailTvDiscountPrice,
+            product
+        )
+        innerBinding.fragmentProductDetailTvTitle.text = product.title
+        innerBinding.fragmentProductDetailTvDescription.text = product.description
         productAttributesAdapter.data = product.attributes
-
-        status.status = NetworkStatusFragment.Status.Loaded
-        scrollView.visibility = View.VISIBLE
-        addToCartBtn.visibility = View.VISIBLE
     }
 }

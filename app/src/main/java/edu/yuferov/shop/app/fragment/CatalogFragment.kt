@@ -4,31 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import edu.yuferov.shop.R
 import edu.yuferov.shop.app.App
 import edu.yuferov.shop.app.adapter.CategoryAdapter
 import edu.yuferov.shop.app.presenter.CatalogPresenter
 import edu.yuferov.shop.app.presenter.ICatalogView
+import edu.yuferov.shop.databinding.FragmentCartBinding
+import edu.yuferov.shop.databinding.FragmentCatalogBinding
 import edu.yuferov.shop.domain.Category
-import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class CatalogFragment : MvpAppCompatFragment(), ICatalogView, IHasNetworkStatusMixin {
+class CatalogFragment : BaseFragment(), ICatalogView {
     @Inject
     lateinit var presenterProvider: Provider<CatalogPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
 
-    override lateinit var status: NetworkStatusFragment
-    private lateinit var itemList: RecyclerView
+    private lateinit var binding: FragmentCatalogBinding
     private lateinit var listItemAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,24 +36,24 @@ class CatalogFragment : MvpAppCompatFragment(), ICatalogView, IHasNetworkStatusM
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_catalog, container, false)
-        status = childFragmentManager.findFragmentById(R.id.fragment_catalog_status) as NetworkStatusFragment
+        binding = FragmentCatalogBinding.inflate(inflater, container, false)
+
+        networkStatus =
+            childFragmentManager.findFragmentById(R.id.fragment_catalog_status) as NetworkStatusFragment
+        mainViewGroup = binding.fragmentCatalogMainViewGroup
 
         listItemAdapter = CategoryAdapter()
         listItemAdapter.clickHandler = CategoryAdapter.OnClickListener {
             presenter.categoryClicked(it)
         }
 
-        itemList = root.findViewById<RecyclerView>(R.id.fragment_catalog_rv_items)
-        itemList.layoutManager = LinearLayoutManager(context)
-        itemList.adapter = listItemAdapter
+        binding.fragmentCatalogRvItems.layoutManager = LinearLayoutManager(context)
+        binding.fragmentCatalogRvItems.adapter = listItemAdapter
 
-        return root
+        return binding.root
     }
 
     override fun bind(categories: List<Category>) {
-        status.status = NetworkStatusFragment.Status.Loaded
-        itemList.visibility = View.VISIBLE
         listItemAdapter.data = categories
     }
 

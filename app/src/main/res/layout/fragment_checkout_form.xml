@@ -284,4 +284,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/fragment_checkout_form_main_view_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="fragment_checkout_form_sv_scroll" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

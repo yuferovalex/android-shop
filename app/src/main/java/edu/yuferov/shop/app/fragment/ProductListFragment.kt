@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import edu.yuferov.shop.R
 import edu.yuferov.shop.app.App
 import edu.yuferov.shop.app.adapter.ProductListAdapter
 import edu.yuferov.shop.app.presenter.IProductListView
 import edu.yuferov.shop.app.presenter.ProductListPresenter
+import edu.yuferov.shop.databinding.FragmentProductListBinding
 import edu.yuferov.shop.domain.Product
-import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
-class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetworkStatusMixin {
+class ProductListFragment : BaseFragment(), IProductListView {
+
     @Inject
     lateinit var presenterProvider: ProductListPresenter.Fabric
     private val presenter by moxyPresenter {
@@ -25,9 +25,8 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetwor
         presenterProvider.create(args.categoryId)
     }
 
-    override lateinit var status: NetworkStatusFragment
+    private lateinit var binding: FragmentProductListBinding
     private lateinit var itemListAdapter: ProductListAdapter
-    private lateinit var itemList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -39,32 +38,29 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetwor
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_product_list, container, false)
-        status =
-            childFragmentManager.findFragmentById(R.id.fragment_product_list_status) as NetworkStatusFragment
+        binding = FragmentProductListBinding.inflate(inflater, container, false)
 
-        itemList = root.findViewById(R.id.fragment_product_list_rv_items)
-        val itemListLayoutManager = LinearLayoutManager(context)
+        networkStatus =
+            childFragmentManager.findFragmentById(R.id.fragment_product_list_status) as NetworkStatusFragment
+        mainViewGroup =
+            binding.fragmentProductListMainViewGroup
 
         itemListAdapter = ProductListAdapter()
-        itemList.adapter = itemListAdapter
-        itemList.layoutManager = itemListLayoutManager
-
         itemListAdapter.onAddToCardClickedListener = ProductListAdapter.OnAddToCardClickedListener {
             presenter.onAddToCardClicked(it)
         }
-
         itemListAdapter.onClickedListener = ProductListAdapter.OnClickedListener {
             presenter.onProductDetailsRequested(it)
         }
 
-        return root
+        binding.fragmentProductListRvItems.adapter = itemListAdapter
+        binding.fragmentProductListRvItems.layoutManager = LinearLayoutManager(context)
+
+        return binding.root
     }
 
     override fun bind(data: List<Product>) {
         itemListAdapter.data = data
-        status.status = NetworkStatusFragment.Status.Loaded
-        itemList.visibility = View.VISIBLE
     }
 
     override fun navigateToProductDetails(productId: Int) {

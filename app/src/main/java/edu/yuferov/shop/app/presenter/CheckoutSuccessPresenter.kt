@@ -5,5 +5,5 @@ import moxy.MvpPresenter
 import javax.inject.Inject
 
 @InjectViewState
-class CheckoutSuccessPresenter @Inject constructor() : MvpPresenter<ICheckoutSuccessView>()  {
+class CheckoutSuccessPresenter @Inject constructor() : BasePresenter<ICheckoutSuccessView>()  {
 }

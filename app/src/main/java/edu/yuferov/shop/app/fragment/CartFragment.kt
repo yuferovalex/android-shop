@@ -17,6 +17,7 @@ import edu.yuferov.shop.app.App
 import edu.yuferov.shop.app.adapter.CartItemAdapter
 import edu.yuferov.shop.app.presenter.CartPresenter
 import edu.yuferov.shop.app.presenter.ICartView
+import edu.yuferov.shop.databinding.FragmentCartBinding
 import edu.yuferov.shop.domain.Cart
 import edu.yuferov.shop.domain.CartItem
 import edu.yuferov.shop.domain.Price
@@ -25,15 +26,14 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class CartFragment : MvpAppCompatFragment(), ICartView, IHasNetworkStatusMixin {
+class CartFragment : BaseFragment(), ICartView {
+
     @Inject
     lateinit var presenterProvider: Provider<CartPresenter>
     private val presenter by moxyPresenter { presenterProvider.get() }
 
-    override lateinit var status: NetworkStatusFragment
+    private lateinit var binding: FragmentCartBinding
     private var quantityDialog: AlertDialog? = null
-    private lateinit var itemList: RecyclerView
-    private lateinit var checkoutBtn: Button
     private lateinit var itemListAdapter: CartItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +46,11 @@ class CartFragment : MvpAppCompatFragment(), ICartView, IHasNetworkStatusMixin {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_cart, container, false)
-        status =
+        binding = FragmentCartBinding.inflate(inflater, container, false)
+
+        networkStatus =
             childFragmentManager.findFragmentById(R.id.fragment_cart_status) as NetworkStatusFragment
+        mainViewGroup = binding.fragmentCartMainGroup
 
         itemListAdapter = CartItemAdapter()
         itemListAdapter.removeClickListener = CartItemAdapter.OnRemoveClickListener {
@@ -61,27 +63,21 @@ class CartFragment : MvpAppCompatFragment(), ICartView, IHasNetworkStatusMixin {
             presenter.onQuantityClick(it)
         }
 
-        itemList = root.findViewById(R.id.fragment_cart_rv_item_list)
-        itemList.adapter = itemListAdapter
-        itemList.layoutManager = LinearLayoutManager(context)
+        binding.fragmentCartRvItemList.adapter = itemListAdapter
+        binding.fragmentCartRvItemList.layoutManager = LinearLayoutManager(context)
 
-        checkoutBtn = root.findViewById(R.id.fragment_cart_btn_checkout)
-        checkoutBtn.setOnClickListener { presenter.onCheckoutBtnClicked() }
+        binding.fragmentCartBtnCheckout.setOnClickListener { presenter.onCheckoutBtnClicked() }
 
-        return root
+        return binding.root
     }
 
     override fun setItems(cart: Cart) {
         itemListAdapter.data = cart.items
-
-        status.status = NetworkStatusFragment.Status.Loaded
-        itemList.visibility = View.VISIBLE
-        checkoutBtn.visibility = View.VISIBLE
     }
 
     override fun updateCheckoutBtnState(active: Boolean, price: Price) {
-        checkoutBtn.isEnabled = active
-        checkoutBtn.text = getString(R.string.cart_do_checkout_text, price.value)
+        binding.fragmentCartBtnCheckout.isEnabled = active
+        binding.fragmentCartBtnCheckout.text = getString(R.string.cart_do_checkout_text, price.value)
     }
 
     override fun insertItem(index: Int) {

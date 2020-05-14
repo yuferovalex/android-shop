@@ -1,18 +1,15 @@
 package edu.yuferov.shop.app.presenter
 
-import android.util.Log
 import edu.yuferov.shop.R
 import edu.yuferov.shop.data.repository.CartRepository
 import edu.yuferov.shop.data.repository.MainApi
-import edu.yuferov.shop.data.repository.SharedPreferencesUserInfoRepository
 import edu.yuferov.shop.data.repository.UserInfoRepository
-import edu.yuferov.shop.domain.BuyRequest
+import edu.yuferov.shop.domain.OrderRequest
 import edu.yuferov.shop.domain.Cart
 import edu.yuferov.shop.domain.PaymentType
 import edu.yuferov.shop.domain.UserInfo
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
-import moxy.MvpPresenter
 import moxy.presenterScope
 import javax.inject.Inject
 
@@ -21,29 +18,17 @@ class CheckoutFormPresenter @Inject constructor(
     private val cartRepository: CartRepository,
     private val userInfoRepository: UserInfoRepository,
     private val api: MainApi
-) : MvpPresenter<ICheckoutFormView>() {
+) : BasePresenter<ICheckoutFormView>() {
 
     lateinit var cart: Cart
     lateinit var userInfo: UserInfo
 
     init {
-        loadData()
-    }
-
-    private fun loadData() = presenterScope.launch {
-        try {
-            viewState.showLoadingStatus()
+        makeRequest {
             cart = cartRepository.load()
             userInfo = userInfoRepository.load()
             viewState.setPrices(cart)
             viewState.setUserInfo(userInfo)
-            viewState.hideNetworkStatus()
-        } catch (throwable: Throwable) {
-            Log.e(
-                "Network error",
-                "An error occurred while downloading cart: ${throwable.message}"
-            );
-            viewState.showLoadErrorStatus()
         }
     }
 
@@ -81,9 +66,9 @@ class CheckoutFormPresenter @Inject constructor(
         if (!validate()) {
             return
         }
-        val request = BuyRequest(cart, userInfo)
+        val request = OrderRequest(cart, userInfo)
         presenterScope.launch {
-            val number = api.buyRequest(request)
+            val number = api.createOrder(request)
             cartRepository.clear()
             viewState.navigateToSuccess(number)
         }
