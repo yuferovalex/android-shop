@@ -3,8 +3,13 @@ package edu.yuferov.shop.app.presenter
 import android.util.Log
 import edu.yuferov.shop.R
 import edu.yuferov.shop.data.repository.CartRepository
+import edu.yuferov.shop.data.repository.MainApi
+import edu.yuferov.shop.data.repository.SharedPreferencesUserInfoRepository
+import edu.yuferov.shop.data.repository.UserInfoRepository
 import edu.yuferov.shop.domain.BuyRequest
 import edu.yuferov.shop.domain.Cart
+import edu.yuferov.shop.domain.PaymentType
+import edu.yuferov.shop.domain.UserInfo
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.MvpPresenter
@@ -13,15 +18,13 @@ import javax.inject.Inject
 
 @InjectViewState
 class CheckoutFormPresenter @Inject constructor(
-    private val repository: CartRepository
+    private val cartRepository: CartRepository,
+    private val userInfoRepository: UserInfoRepository,
+    private val api: MainApi
 ) : MvpPresenter<ICheckoutFormView>() {
 
-    enum class PaymentType {
-        CASH, CARD
-    }
-
     lateinit var cart: Cart
-    lateinit var request: BuyRequest
+    lateinit var userInfo: UserInfo
 
     init {
         loadData()
@@ -30,9 +33,10 @@ class CheckoutFormPresenter @Inject constructor(
     private fun loadData() = presenterScope.launch {
         try {
             viewState.showLoadingStatus()
-            cart = repository.load()
-            request = BuyRequest(cart)
+            cart = cartRepository.load()
+            userInfo = userInfoRepository.load()
             viewState.setPrices(cart)
+            viewState.setUserInfo(userInfo)
             viewState.hideNetworkStatus()
         } catch (throwable: Throwable) {
             Log.e(
@@ -44,46 +48,57 @@ class CheckoutFormPresenter @Inject constructor(
     }
 
     fun onLastNameChanged(value: String) {
-        request.lastName = value
-        validate()
+        userInfo.lastName = value.trim()
+        onUserInfoChanged()
     }
 
     fun onFirstNameChanged(value: String) {
-        request.firstName = value
-        validate()
+        userInfo.firstName = value.trim()
+        onUserInfoChanged()
     }
 
     fun onMiddleNameChanged(value: String) {
-        request.middleName = value
-        validate()
+        userInfo.middleName = value.trim()
+        onUserInfoChanged()
     }
 
     fun onPhoneChanged(value: String) {
-        request.phone = value
-        validate()
+        userInfo.phone = value.trim()
+        onUserInfoChanged()
     }
 
     fun onPaymentTypeChanged(value: PaymentType) {
-        request.paymentType = value.toString()
+        userInfo.paymentType = value
+        onUserInfoChanged()
+    }
+
+    private fun onUserInfoChanged() {
+        validate()
+        presenterScope.launch { userInfoRepository.save(userInfo) }
     }
 
     fun onSubmitBtnClicked() {
         if (!validate()) {
             return
         }
-        // TODO: PUSH /api/buy
+        val request = BuyRequest(cart, userInfo)
+        presenterScope.launch {
+            val number = api.buyRequest(request)
+            cartRepository.clear()
+            viewState.navigateToSuccess(number)
+        }
     }
 
     private fun validate(): Boolean {
-        var msg = validateName(request.lastName)
+        var msg = validateName(userInfo.lastName)
         var result = msg == 0
         viewState.setLastNameError(msg)
 
-        msg = validateName(request.lastName)
+        msg = validateName(userInfo.firstName)
         result = result && msg == 0
         viewState.setFirstNameError(msg)
 
-        msg = validateName(request.lastName, required = false)
+        msg = validateName(userInfo.middleName, required = false)
         result = result && msg == 0
         viewState.setMiddleNameError(msg)
 

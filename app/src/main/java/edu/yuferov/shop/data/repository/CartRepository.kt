@@ -12,4 +12,6 @@ interface CartRepository {
 
     suspend fun setCount(productId: Int, count: Int)
 
+    suspend fun clear()
+
 }

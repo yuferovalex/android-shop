@@ -1,22 +1,28 @@
 package edu.yuferov.shop.app.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import dagger.Module
 import dagger.Provides
-import edu.yuferov.shop.data.repository.CartRepository
-import edu.yuferov.shop.data.repository.MainApi
-import edu.yuferov.shop.data.repository.MainRepositoryImpl
-import edu.yuferov.shop.data.repository.SharedPreferencesCartRepository
+import edu.yuferov.shop.data.repository.*
 
 @Module
 class RepositoryModule {
 
+    @Provides
+    fun providesSharedPreferences(context: Context) =
+        PreferenceManager.getDefaultSharedPreferences(context)
 
     @Provides
-    fun repository(): MainApi = MainRepositoryImpl()
+    fun providesMainApi(): MainApi = MainRepositoryImpl()
 
     @Provides
-    fun cartRepository(context: Context, api: MainApi): CartRepository =
-        SharedPreferencesCartRepository(PreferenceManager.getDefaultSharedPreferences(context), api)
+    fun providesCartRepository(sharedPreferences: SharedPreferences, api: MainApi): CartRepository =
+        SharedPreferencesCartRepository(sharedPreferences, api)
+
+    @Provides
+    fun providesUserInfoRepository(sharedPreferences: SharedPreferences): UserInfoRepository =
+        SharedPreferencesUserInfoRepository(sharedPreferences)
+
 }

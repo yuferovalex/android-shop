@@ -57,11 +57,17 @@
         tools:layout="@layout/fragment_checkout_form">
         <action
             android:id="@+id/action_checkout_form_fragment_to_checkout_success_fragment"
-            app:destination="@id/checkout_success_fragment" />
+            app:destination="@id/checkout_success_fragment"
+            app:popUpTo="@id/cart_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/checkout_success_fragment"
         android:name="edu.yuferov.shop.app.fragment.CheckoutSuccessFragment"
         android:label="@string/title_checkout_success"
-        tools:layout="@layout/fragment_checkout_success" />
+        tools:layout="@layout/fragment_checkout_success" >
+        <argument
+            android:name="orderNumber"
+            app:argType="integer" />
+    </fragment>
 </navigation>

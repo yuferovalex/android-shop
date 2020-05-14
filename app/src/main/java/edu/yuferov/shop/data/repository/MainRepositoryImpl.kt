@@ -1,10 +1,7 @@
 package edu.yuferov.shop.data.repository
 
 import android.net.Uri
-import edu.yuferov.shop.domain.Category
-import edu.yuferov.shop.domain.Percent
-import edu.yuferov.shop.domain.Price
-import edu.yuferov.shop.domain.Product
+import edu.yuferov.shop.domain.*
 import kotlinx.coroutines.delay
 import java.util.stream.Collectors
 import java.util.stream.IntStream
@@ -47,6 +44,10 @@ class MainRepositoryImpl : MainApi {
     override suspend fun loadProduct(productId: Int): Product {
         delay(1_000)
         return createProduct(productId)
+    }
+
+    override suspend fun buyRequest(request: BuyRequest): Int {
+        return 123456
     }
 
     private fun createProduct(productId: Int) = Product(

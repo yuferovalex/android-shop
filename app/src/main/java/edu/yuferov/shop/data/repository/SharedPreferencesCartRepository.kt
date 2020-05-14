@@ -58,6 +58,10 @@ class SharedPreferencesCartRepository @Inject constructor(
         save(items)
     }
 
+    override suspend fun clear() {
+        save(Cart(mutableListOf()))
+    }
+
     private class Tuple(var id: Int, var count: Int) {
         companion object {
             fun of(string: String): Tuple {

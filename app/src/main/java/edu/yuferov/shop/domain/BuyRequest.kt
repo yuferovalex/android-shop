@@ -1,7 +1,8 @@
 package edu.yuferov.shop.domain
 
 class BuyRequest(
-    cart: Cart
+    cart: Cart,
+    userInfo: UserInfo
 ){
     data class CartItem(val productId: Int, val count: Int)
 
@@ -10,10 +11,9 @@ class BuyRequest(
     }
 
     val totalPrice: Double = cart.totalPrice.value
-
-    var lastName: String = ""
-    var firstName: String = ""
-    var middleName: String = ""
-    var phone: String = ""
-    var paymentType: String = ""
+    val lastName: String = userInfo.lastName
+    val firstName: String = userInfo.firstName
+    val middleName: String = userInfo.middleName
+    val phone: String = userInfo.phone
+    val paymentType: String = userInfo.paymentType.toString()
 }
