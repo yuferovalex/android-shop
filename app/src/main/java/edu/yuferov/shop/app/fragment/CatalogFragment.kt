@@ -28,7 +28,7 @@ class CatalogFragment : MvpAppCompatFragment(), ICatalogView, IHasNetworkStatusM
     private val presenter by moxyPresenter { presenterProvider.get() }
 
     override lateinit var status: NetworkStatusFragment
-    private lateinit var scrollView: ScrollView
+    private lateinit var itemList: RecyclerView
     private lateinit var listItemAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,14 +43,13 @@ class CatalogFragment : MvpAppCompatFragment(), ICatalogView, IHasNetworkStatusM
     ): View? {
         val root = inflater.inflate(R.layout.fragment_catalog, container, false)
         status = childFragmentManager.findFragmentById(R.id.fragment_catalog_status) as NetworkStatusFragment
-        scrollView = root.findViewById(R.id.fragment_catalog_sv_scrol)
 
         listItemAdapter = CategoryAdapter()
         listItemAdapter.clickHandler = CategoryAdapter.OnClickListener {
             presenter.categoryClicked(it)
         }
 
-        val itemList = scrollView.findViewById<RecyclerView>(R.id.fragment_catalog_rv_items)
+        itemList = root.findViewById<RecyclerView>(R.id.fragment_catalog_rv_items)
         itemList.layoutManager = LinearLayoutManager(context)
         itemList.adapter = listItemAdapter
 
@@ -59,7 +58,7 @@ class CatalogFragment : MvpAppCompatFragment(), ICatalogView, IHasNetworkStatusM
 
     override fun bind(categories: List<Category>) {
         status.status = NetworkStatusFragment.Status.Loaded
-        scrollView.visibility = View.VISIBLE
+        itemList.visibility = View.VISIBLE
         listItemAdapter.data = categories
     }
 

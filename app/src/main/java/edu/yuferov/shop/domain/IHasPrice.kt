@@ -7,6 +7,9 @@ interface IHasPrice {
     val totalPrice
         get() = price - discount
 
+    val discountValue
+        get() = price * discount
+
     val discount: Percent
     val price: Price
 }

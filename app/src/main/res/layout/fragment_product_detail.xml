@@ -28,6 +28,7 @@
 
     <Button
         android:id="@+id/fragment_product_detail_btn_add_to_cart"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_to_cart"

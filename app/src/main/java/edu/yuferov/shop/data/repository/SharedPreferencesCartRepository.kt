@@ -41,29 +41,20 @@ class SharedPreferencesCartRepository @Inject constructor(
         return Cart(items)
     }
 
-    override fun add(productId: Int, count: Int) {
+    override suspend fun add(productId: Int, count: Int) {
         val items = loadItems()
-        items.add(Tuple(productId, count))
+        val item = items.find { it.id == productId }
+        if (item != null) {
+            item.count += count
+        } else {
+            items.add(Tuple(productId, count))
+        }
         save(items)
     }
 
-    override fun setCount(productId: Int, count: Int) {
+    override suspend fun setCount(productId: Int, count: Int) {
         val items = loadItems()
         items.find { it.id == productId }?.count = count
-        save(items)
-    }
-
-    override fun increaseCount(productId: Int) {
-        val items = loadItems()
-        items.find { it.id == productId }
-            ?.count
-            ?.inc()
-        save(items)
-    }
-
-    override fun remove(productId: Int) {
-        val items = loadItems()
-        items.removeIf { it.id == productId }
         save(items)
     }
 

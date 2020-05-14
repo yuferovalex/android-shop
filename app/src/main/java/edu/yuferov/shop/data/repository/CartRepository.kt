@@ -8,13 +8,8 @@ interface CartRepository {
 
     suspend fun load(): Cart
 
-    fun add(productId: Int, count: Int)
+    suspend fun add(productId: Int, count: Int)
 
-    fun setCount(productId: Int, count: Int)
-
-    fun increaseCount(productId: Int)
-
-    fun remove(productId: Int)
-
+    suspend fun setCount(productId: Int, count: Int)
 
 }

@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground" >
 
     <TextView
         android:id="@+id/list_item_cart_item_tv_price_for_one"
@@ -60,9 +63,9 @@
     <View
         android:id="@+id/list_item_cart_item_horizontal_line"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="#c0c0c0"
+        android:background="#B2C0C0C0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_tv_price_for_one" />

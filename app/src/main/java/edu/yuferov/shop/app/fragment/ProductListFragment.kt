@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ScrollView
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +27,7 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetwor
 
     override lateinit var status: NetworkStatusFragment
     private lateinit var itemListAdapter: ProductListAdapter
-    private lateinit var scrollView: ScrollView
+    private lateinit var itemList: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
@@ -46,9 +43,7 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetwor
         status =
             childFragmentManager.findFragmentById(R.id.fragment_product_list_status) as NetworkStatusFragment
 
-        scrollView = root.findViewById(R.id.fragment_product_list_sv_scroll)
-
-        val itemList: RecyclerView = scrollView.findViewById(R.id.fragment_product_list_rv_items)
+        itemList = root.findViewById(R.id.fragment_product_list_rv_items)
         val itemListLayoutManager = LinearLayoutManager(context)
 
         itemListAdapter = ProductListAdapter()
@@ -69,7 +64,7 @@ class ProductListFragment : MvpAppCompatFragment(), IProductListView, IHasNetwor
     override fun bind(data: List<Product>) {
         itemListAdapter.data = data
         status.status = NetworkStatusFragment.Status.Loaded
-        scrollView.visibility = View.VISIBLE
+        itemList.visibility = View.VISIBLE
     }
 
     override fun navigateToProductDetails(productId: Int) {

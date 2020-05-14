@@ -17,22 +17,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
-    <ScrollView
-        android:id="@+id/fragment_product_list_sv_scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_product_list_rv_items"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_product_list_rv_items"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:itemCount="20"
-            tools:listitem="@layout/list_item_product" />
-    </ScrollView>
+        tools:itemCount="20"
+        tools:listitem="@layout/list_item_product" />
 </androidx.constraintlayout.widget.ConstraintLayout>

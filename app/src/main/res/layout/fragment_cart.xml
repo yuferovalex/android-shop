@@ -6,46 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".app.fragment.CartFragment">
 
-    <ScrollView
-        android:id="@+id/fragment_cart_sv_scroll"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_cart_rv_item_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/fragment_cart_btn_checkout"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_cart_btn_checkout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_cart_rv_item_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="4"
-                tools:listitem="@layout/list_item_cart_item" />
-
-            <fragment
-                android:id="@+id/fragment_cart_total_sum"
-                android:name="edu.yuferov.shop.app.fragment.TotalSumFragment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_cart_rv_item_list" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintVertical_bias="0.0"
+        tools:itemCount="4"
+        tools:listitem="@layout/list_item_cart_item" />
 
     <Button
         android:id="@+id/fragment_cart_btn_checkout"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="gone"

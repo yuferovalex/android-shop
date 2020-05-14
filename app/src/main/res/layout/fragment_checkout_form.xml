@@ -6,18 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".app.activity.MainActivity">
 
+    <fragment
+        android:id="@+id/fragment_checkout_form_status"
+        android:name="edu.yuferov.shop.app.fragment.NetworkStatusFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
     <ScrollView
+        android:id="@+id/fragment_checkout_form_sv_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_checkout_form_tv_last_name"
+                android:id="@+id/fragment_checkout_form_last_name_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -30,14 +44,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_buyer_header">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_checkout_form_tv_last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName|textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_checkout_form_tv_first_name"
+                android:id="@+id/fragment_checkout_form_first_name_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -47,17 +62,18 @@
                 android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_last_name">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_last_name_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_checkout_form_tv_first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName|textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_checkout_form_tv_middle_name"
+                android:id="@+id/fragment_checkout_form_middle_name_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -67,17 +83,18 @@
                 android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_first_name">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_first_name_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_checkout_form_tv_middle_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/middle_name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName|textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_checkout_form_tv_phone"
+                android:id="@+id/fragment_checkout_form_phone_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -87,9 +104,10 @@
                 android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_middle_name">
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_middle_name_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fragment_checkout_form_tv_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
@@ -123,7 +141,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_phone" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_phone_layout" />
 
             <RadioGroup
                 android:id="@+id/fragment_checkout_form_bg_payment_type"
@@ -155,14 +173,97 @@
                     android:textSize="18sp" />
             </RadioGroup>
 
-            <include
-                android:id="@+id/fragment_checkout_form_total_sum"
-                layout="@layout/fragment_total_sum"
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/checkout_total_title"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_bg_payment_type" />
+
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/checkout_total_goods"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_title" />
+
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fragment_checkout_form_tv_price_title"
+                tools:text="1 000 руб." />
+
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_price_discount_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/checkout_total_discount"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_price_title" />
+
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_price_discount_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fragment_checkout_form_tv_price_discount_title"
+                tools:text="2 руб." />
+
+            <View
+                android:id="@+id/fragment_checkout_form_horizontal_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="#c0c0c0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_price_discount_title" />
+
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_total_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/checkout_total_sum"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_horizontal_line"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/fragment_checkout_form_tv_total_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fragment_checkout_form_tv_total_price_title"
+                tools:text="998 руб." />
 
             <Button
                 android:id="@+id/fragment_checkout_form_btn_submit"
@@ -170,6 +271,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/checkout_do_checkout_btn"
@@ -177,8 +279,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_total_sum"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_checkout_form_tv_total_price_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

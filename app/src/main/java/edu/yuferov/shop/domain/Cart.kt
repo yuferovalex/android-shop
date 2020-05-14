@@ -15,6 +15,13 @@ class Cart(
         }
 
     override val discount: Percent
-        get() = Percent((1 - totalPrice.value / price.value) * 100)
+        get() = Percent(
+            if (price.value > 0.0) {
+                (price.value - totalPrice.value) / price.value * 100
+            } else {
+                0.0
+            }
+        )
+
 }
 

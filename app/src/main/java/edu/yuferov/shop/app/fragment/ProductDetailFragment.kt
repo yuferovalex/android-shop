@@ -66,6 +66,7 @@ class ProductDetailFragment : MvpAppCompatFragment(), IProductDetailView, IHasNe
         productAttributesAdapter = ProductAttributeAdapter()
         attributes.adapter = productAttributesAdapter
         attributes.layoutManager = LinearLayoutManager(context)
+        attributes.isNestedScrollingEnabled = false
 
         addToCartBtn = root.findViewById(R.id.fragment_product_detail_btn_add_to_cart)
         addToCartBtn.setOnClickListener { presenter.onAddToCartClicked() }

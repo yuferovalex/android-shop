@@ -1,7 +1,7 @@
 package edu.yuferov.shop.app.presenter
 
 import android.util.Log
-import edu.yuferov.shop.app.usecase.AddToCartUseCase
+import edu.yuferov.shop.data.repository.CartRepository
 import edu.yuferov.shop.data.repository.MainApi
 import edu.yuferov.shop.domain.Product
 import kotlinx.coroutines.launch
@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class ProductListPresenter(
-    private val repository: MainApi,
-    private val addToCard: AddToCartUseCase,
+    private val api: MainApi,
+    private val repository: CartRepository,
     private val categoryId: Int
 ) : MvpPresenter<IProductListView>() {
 
@@ -22,16 +22,16 @@ class ProductListPresenter(
     }
 
     class Fabric @Inject constructor(
-        private val repository: MainApi,
-        private val addToCard: AddToCartUseCase
+        private val api: MainApi,
+        private val repository: CartRepository
     ) {
-        fun create(categoryId: Int) = ProductListPresenter(repository, addToCard, categoryId)
+        fun create(categoryId: Int) = ProductListPresenter(api, repository, categoryId)
     }
 
     private fun loadData() = presenterScope.launch {
         try {
             viewState.showLoadingStatus()
-            val pageData = repository.loadProductsOfCategory(categoryId)
+            val pageData = api.loadProductsOfCategory(categoryId)
             viewState.bind(pageData)
         } catch (throwable: Throwable) {
             Log.e(
@@ -42,7 +42,9 @@ class ProductListPresenter(
         }
     }
 
-    fun onAddToCardClicked(product: Product) = addToCard(product)
+    fun onAddToCardClicked(product: Product) = presenterScope.launch {
+        repository.add(product.id, 1)
+    }
 
     fun onProductDetailsRequested(product: Product) =
         viewState.navigateToProductDetails(product.id)
