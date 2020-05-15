@@ -36,4 +36,6 @@
     <string name="field_contains_invalid_characters_error">Поле должно содержать только буквы</string>
     <string name="your_order_number">Номер вашего заказа</string>
     <string name="phone_must_contains_eleven_numbers">Телефон должен содержать ровно 11 цифр</string>
+    <string name="product_share_link">http://yuferov.edu/product/%1$d</string>
+    <string name="sharing_not_available">Функция \"Поделиться\" нелоступна на данном устройстве</string>
 </resources>

@@ -65,6 +65,9 @@
         <argument
             android:name="productId"
             app:argType="integer" />
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="http://yuferov.edu/product/{productId}" />
     </fragment>
     <fragment
         android:id="@+id/checkout_form_fragment"

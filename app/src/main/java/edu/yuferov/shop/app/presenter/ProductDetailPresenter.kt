@@ -37,4 +37,8 @@ class ProductDetailPresenter(
         repository.add(product.id, 1)
         mainPresenter.updateItemsCount()
     }
+
+    fun onShareButtonClicked() {
+        mainPresenter.showProductShareDialog(product.id)
+    }
 }

@@ -40,6 +40,8 @@ class MainPresenter @Inject constructor(
         }
     }
 
-
+    fun showProductShareDialog(productId: Int) {
+        viewState.showShareProduct(productId)
+    }
 
 }

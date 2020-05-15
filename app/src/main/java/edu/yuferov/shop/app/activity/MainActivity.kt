@@ -1,7 +1,10 @@
 package edu.yuferov.shop.app.activity
 
+import android.content.ActivityNotFoundException
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.app.ShareCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -63,5 +66,18 @@ class MainActivity : MvpAppCompatActivity(), IMainView {
 
     override fun setBottomBarVisible(visible: Boolean) {
         navView.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    override fun showShareProduct(productId: Int) {
+        val shareIntent = ShareCompat.IntentBuilder.from(this)
+            .setText(getString(R.string.product_share_link, productId))
+            .setType("text/plain")
+            .intent
+        try {
+            startActivity(shareIntent)
+        } catch (ex: ActivityNotFoundException) {
+            Toast.makeText(this, getString(R.string.sharing_not_available),
+                Toast.LENGTH_LONG).show()
+        }
     }
 }

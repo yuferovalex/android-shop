@@ -1,9 +1,10 @@
 package edu.yuferov.shop.app.fragment
 
+import android.content.ActivityNotFoundException
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
+import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.yuferov.shop.R
@@ -42,6 +43,7 @@ class ProductDetailFragment : BaseFragment(), IProductDetailView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         binding = FragmentProductDetailBinding.inflate(inflater, container, false)
         innerBinding = FragmentProductDetailInnerBinding.bind(binding.root)
 
@@ -60,6 +62,20 @@ class ProductDetailFragment : BaseFragment(), IProductDetailView {
         }
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.product_detail_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.product_deteil_menu_share -> {
+                presenter.onShareButtonClicked()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun bind(product: Product) {
