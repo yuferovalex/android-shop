@@ -32,7 +32,11 @@ class MainRepositoryImpl : MainApi {
         )
     }
 
-    override suspend fun loadProductsOfCategory(categoryId: Int): List<Product> {
+    override suspend fun loadProductsOfCategory(
+        categoryId: Int,
+        page: Int,
+        pageSize: Int
+    ): MutableList<Product> {
         delay(1_000)
         return IntStream.range(1, 20)
             //.skip((index * length).toLong())

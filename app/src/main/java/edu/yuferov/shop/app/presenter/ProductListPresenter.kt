@@ -24,9 +24,15 @@ class ProductListPresenter(
         fun create(categoryId: Int) = ProductListPresenter(api, repository, mainPresenter, categoryId)
     }
 
+    companion object {
+        const val PAGE_SIZE = 15
+    }
+
+    private lateinit var pageData: MutableList<Product>
+
     init {
         makeRequest {
-            val pageData = api.loadProductsOfCategory(categoryId)
+            pageData = api.loadProductsOfCategory(categoryId, 0, PAGE_SIZE)
             viewState.bind(pageData)
         }
     }
@@ -38,4 +44,12 @@ class ProductListPresenter(
 
     fun onProductDetailsRequested(product: Product) =
         viewState.navigateToProductDetails(product.id)
+
+    fun onLoadNextPage(page: Int) = presenterScope.launch {
+        val currentCount = pageData.size
+        val nextPage = api.loadProductsOfCategory(categoryId, page, PAGE_SIZE)
+        val received = nextPage.size
+        pageData.addAll(nextPage)
+        viewState.itemsAppended(currentCount, received)
+    }
 }

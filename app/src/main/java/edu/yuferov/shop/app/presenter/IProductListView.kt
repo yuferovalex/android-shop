@@ -10,5 +10,8 @@ interface IProductListView : IBaseView {
     fun bind(data: List<Product>)
 
     @StateStrategyType(SkipStrategy::class)
+    fun itemsAppended(from: Int, count: Int)
+
+    @StateStrategyType(SkipStrategy::class)
     fun navigateToProductDetails(productId: Int)
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import edu.yuferov.shop.R
 import edu.yuferov.shop.app.App
 import edu.yuferov.shop.app.adapter.ProductListAdapter
@@ -13,6 +14,7 @@ import edu.yuferov.shop.app.presenter.IProductListView
 import edu.yuferov.shop.app.presenter.ProductListPresenter
 import edu.yuferov.shop.databinding.FragmentProductListBinding
 import edu.yuferov.shop.domain.Product
+import edu.yuferov.shop.util.EndlessRecyclerViewScrollListener
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
@@ -53,14 +55,24 @@ class ProductListFragment : BaseFragment(), IProductListView {
             presenter.onProductDetailsRequested(it)
         }
 
+        val layoutManager = LinearLayoutManager(context)
         binding.fragmentProductListRvItems.adapter = itemListAdapter
-        binding.fragmentProductListRvItems.layoutManager = LinearLayoutManager(context)
+        binding.fragmentProductListRvItems.layoutManager = layoutManager
+        binding.fragmentProductListRvItems.addOnScrollListener(
+            EndlessRecyclerViewScrollListener(layoutManager) { page, _, _ ->
+                presenter.onLoadNextPage(page)
+            }
+        )
 
         return binding.root
     }
 
     override fun bind(data: List<Product>) {
         itemListAdapter.data = data
+    }
+
+    override fun itemsAppended(from: Int, count: Int) {
+        itemListAdapter.notifyItemRangeInserted(from, count)
     }
 
     override fun navigateToProductDetails(productId: Int) {
