@@ -17,6 +17,9 @@ interface ICartView : IBaseView {
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun updateCheckoutBtnState(active: Boolean, price: Price)
 
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun emptyCartMessageVisibility(visible: Boolean)
+
     @StateStrategyType(SkipStrategy::class)
     fun removeItem(index: Int)
 

@@ -20,7 +20,7 @@ class CartPresenter @Inject constructor(
         makeRequest {
             cart = repository.load()
             viewState.setItems(cart)
-            updateButton()
+            updateButtonAndEmptyMessage()
         }
     }
 
@@ -38,7 +38,7 @@ class CartPresenter @Inject constructor(
         repository.save(cart)
 
         viewState.removeItem(index)
-        updateButton()
+        updateButtonAndEmptyMessage()
         viewState.showItemRemovedMessage(index, cartItem)
         mainPresenter.updateItemsCount()
     }
@@ -48,12 +48,13 @@ class CartPresenter @Inject constructor(
         repository.save(cart)
 
         viewState.insertItem(index)
-        updateButton()
+        updateButtonAndEmptyMessage()
         mainPresenter.updateItemsCount()
     }
 
-    private fun updateButton() {
+    private fun updateButtonAndEmptyMessage() {
         viewState.updateCheckoutBtnState(cart.items.isNotEmpty(), cart.totalPrice)
+        viewState.emptyCartMessageVisibility(cart.items.isEmpty())
     }
 
     fun onQuantityChanged(cartItem: CartItem, value: Int) = presenterScope.launch {
@@ -65,7 +66,7 @@ class CartPresenter @Inject constructor(
         viewState.hideQuantityDialog()
         val index = cart.items.indexOf(cartItem)
         viewState.updateItem(index)
-        updateButton()
+        updateButtonAndEmptyMessage()
         mainPresenter.updateItemsCount()
     }
 
@@ -75,7 +76,7 @@ class CartPresenter @Inject constructor(
         mainPresenter.updateItemsCount()
         val index = cart.items.indexOf(cartItem)
         viewState.updateItem(index)
-        updateButton()
+        updateButtonAndEmptyMessage()
         viewState.hideQuantityDialog()
         mainPresenter.updateItemsCount()
     }

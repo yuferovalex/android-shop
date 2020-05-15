@@ -80,6 +80,10 @@ class CartFragment : BaseFragment(), ICartView {
         binding.fragmentCartBtnCheckout.text = getString(R.string.cart_do_checkout_text, price.value)
     }
 
+    override fun emptyCartMessageVisibility(visible: Boolean) {
+        binding.fragmentCartTvEmpty.visibility = if (!visible) View.GONE else View.VISIBLE
+    }
+
     override fun insertItem(index: Int) {
         itemListAdapter.notifyItemInserted(index)
     }

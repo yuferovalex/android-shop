@@ -38,4 +38,5 @@
     <string name="phone_must_contains_eleven_numbers">Телефон должен содержать ровно 11 цифр</string>
     <string name="product_share_link">http://yuferov.edu/product/%1$d</string>
     <string name="sharing_not_available">Функция \"Поделиться\" нелоступна на данном устройстве</string>
+    <string name="cart_empty">Корзина пуста</string>
 </resources>
