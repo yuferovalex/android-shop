@@ -44,12 +44,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/fragment_cart_main_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:constraint_referenced_ids="fragment_cart_btn_checkout,fragment_cart_rv_item_list" />
-
     <TextView
         android:id="@+id/fragment_cart_tv_empty"
         android:layout_width="wrap_content"
@@ -60,5 +54,11 @@
         app:layout_constraintStart_toStartOf="@+id/fragment_cart_rv_item_list"
         app:layout_constraintTop_toTopOf="@+id/fragment_cart_rv_item_list"
         tools:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/fragment_cart_main_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="fragment_cart_btn_checkout,fragment_cart_rv_item_list,fragment_cart_tv_empty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
