@@ -25,19 +25,21 @@
         android:id="@+id/list_item_product_tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="8dp"
         android:foreground="@drawable/cross_out"
-        app:layout_constraintStart_toEndOf="@+id/list_item_product_iv_thumbnail"
-        app:layout_constraintTop_toTopOf="@+id/list_item_product_iv_thumbnail"
+        app:layout_constraintBaseline_toBaselineOf="@+id/list_item_product_tv_discount_price"
+        app:layout_constraintStart_toEndOf="@+id/list_item_product_tv_discount_price"
         tools:text="1 000.00 &#8381;" />
 
     <TextView
         android:id="@+id/list_item_product_tv_discount_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/list_item_product_tv_price"
-        app:layout_constraintStart_toEndOf="@+id/list_item_product_tv_price"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/list_item_product_iv_thumbnail"
+        app:layout_constraintTop_toTopOf="@+id/list_item_product_iv_thumbnail"
         tools:text="990.00 &#8381;" />
 
     <TextView
@@ -45,11 +47,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/list_item_product_iv_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_product_tv_price"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_product_tv_discount_price"
         tools:text="Наименование" />
 
     <Button
@@ -57,9 +61,24 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:text="@string/add_to_cart"
-        app:layout_constraintBottom_toBottomOf="@+id/list_item_product_iv_thumbnail"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_product_tv_title"
         tools:text="В корзину" />
+
+
+    <View
+        android:id="@+id/list_item_product_horizontal_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="#B2C0C0C0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_product_btn_to_cart"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

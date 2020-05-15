@@ -98,10 +98,18 @@ class CheckoutFormFragment : BaseFragment(), ICheckoutFormView {
     }
 
     override fun setUserInfo(userInfo: UserInfo) {
-        binding.fragmentCheckoutFormTvLastName.setText(userInfo.lastName)
-        binding.fragmentCheckoutFormTvFirstName.setText(userInfo.firstName)
-        binding.fragmentCheckoutFormTvMiddleName.setText(userInfo.middleName)
-        binding.fragmentCheckoutFormTvPhone.setText(userInfo.phone)
+        if (userInfo.lastName.isNotBlank()) {
+            binding.fragmentCheckoutFormTvLastName.setText(userInfo.lastName)
+        }
+        if (userInfo.firstName.isNotBlank()) {
+            binding.fragmentCheckoutFormTvFirstName.setText(userInfo.firstName)
+        }
+        if (userInfo.middleName.isNotBlank()) {
+            binding.fragmentCheckoutFormTvMiddleName.setText(userInfo.middleName)
+        }
+        if (userInfo.phone.isNotBlank()) {
+            binding.fragmentCheckoutFormTvPhone.setText(userInfo.phone)
+        }
 
         when (userInfo.paymentType) {
             PaymentType.CARD ->

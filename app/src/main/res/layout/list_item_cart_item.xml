@@ -33,19 +33,21 @@
         android:id="@+id/list_item_cart_item_tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="8dp"
         android:foreground="@drawable/cross_out"
-        app:layout_constraintStart_toEndOf="@+id/list_item_cart_item_iv_thumbnail"
-        app:layout_constraintTop_toTopOf="@+id/list_item_cart_item_iv_thumbnail"
+        app:layout_constraintBaseline_toBaselineOf="@+id/list_item_cart_item_tv_discount_price"
+        app:layout_constraintStart_toEndOf="@+id/list_item_cart_item_tv_discount_price"
         tools:text="1 000.00 &#8381;" />
 
     <TextView
         android:id="@+id/list_item_cart_item_tv_discount_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/list_item_cart_item_tv_price"
-        app:layout_constraintStart_toEndOf="@+id/list_item_cart_item_tv_price"
+        android:layout_marginStart="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/list_item_cart_item_iv_thumbnail"
+        app:layout_constraintTop_toTopOf="@+id/list_item_cart_item_iv_thumbnail"
         tools:text="990.00 &#8381;" />
 
     <TextView
@@ -53,15 +55,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/list_item_cart_item_iv_thumbnail"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_tv_price"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_tv_discount_price"
         tools:text="Наименование" />
 
     <View
-        android:id="@+id/list_item_cart_item_horizontal_line"
+        android:id="@+id/list_item_cart_item_horizontal_line_1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
@@ -77,10 +81,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="1dp"
+        android:drawableLeft="@drawable/ic_delete_white_24dp"
         android:text="@string/cart_item_remove_btn_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_horizontal_line" />
+        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_horizontal_line_1" />
 
     <Button
         android:id="@+id/list_item_cart_item_btn_count"
@@ -92,6 +97,17 @@
         android:text="@string/template_quantity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_horizontal_line"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_horizontal_line_1"
         tools:text="1 шт." />
+
+    <View
+        android:id="@+id/list_item_cart_item_horizontal_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="#B2C0C0C0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_item_cart_item_btn_count" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

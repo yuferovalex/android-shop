@@ -56,9 +56,9 @@ class MainActivity : MvpAppCompatActivity(), IMainView {
     override fun setCartItemCount(count: Int) {
         if (count == 0) {
             navView.removeBadge(R.id.cart_fragment)
-            return
+        } else {
+            navView.getOrCreateBadge(R.id.cart_fragment).number = count
         }
-        navView.getOrCreateBadge(R.id.cart_fragment).number = count
     }
 
     override fun setBottomBarVisible(visible: Boolean) {

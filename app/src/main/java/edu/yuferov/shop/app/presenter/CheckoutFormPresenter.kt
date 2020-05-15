@@ -35,21 +35,29 @@ class CheckoutFormPresenter @Inject constructor(
 
     fun onLastNameChanged(value: String) {
         userInfo.lastName = value.trim()
+        val msg = validateName(userInfo.lastName)
+        viewState.setLastNameError(msg)
         onUserInfoChanged()
     }
 
     fun onFirstNameChanged(value: String) {
         userInfo.firstName = value.trim()
+        val msg = validateName(userInfo.firstName)
+        viewState.setFirstNameError(msg)
         onUserInfoChanged()
     }
 
     fun onMiddleNameChanged(value: String) {
         userInfo.middleName = value.trim()
+        val msg = validateName(userInfo.middleName, required = false)
+        viewState.setMiddleNameError(msg)
         onUserInfoChanged()
     }
 
     fun onPhoneChanged(value: String) {
         userInfo.phone = value.trim()
+        val msg = validatePhone(userInfo.phone)
+        viewState.setPhoneError(msg)
         onUserInfoChanged()
     }
 
@@ -59,12 +67,11 @@ class CheckoutFormPresenter @Inject constructor(
     }
 
     private fun onUserInfoChanged() {
-        validate()
         presenterScope.launch { userInfoRepository.save(userInfo) }
     }
 
     fun onSubmitBtnClicked() {
-        if (!validate()) {
+        if (!validateAll()) {
             return
         }
         val request = OrderRequest(cart, userInfo)
@@ -76,7 +83,7 @@ class CheckoutFormPresenter @Inject constructor(
         }
     }
 
-    private fun validate(): Boolean {
+    private fun validateAll(): Boolean {
         var msg = validateName(userInfo.lastName)
         var result = msg == 0
         viewState.setLastNameError(msg)

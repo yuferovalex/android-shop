@@ -11,15 +11,11 @@ fun TextView.formatPrice(price: Price) {
 }
 
 fun bindPrice(price: TextView, discountPrice: TextView, model: IHasPrice) {
-    val context = price.context
+    discountPrice.formatPrice(model.totalPrice)
     if (model.hasDiscount) {
-        price.foreground = context.getDrawable(R.drawable.cross_out)
-        discountPrice.visibility = View.VISIBLE
-        discountPrice.formatPrice(model.totalPrice)
+        price.visibility = View.VISIBLE
+        price.formatPrice(model.price)
     } else {
-        price.foreground = null
-        discountPrice.text = ""
-        discountPrice.visibility = View.GONE
+        price.visibility = View.GONE
     }
-    price.formatPrice(model.price)
 }
