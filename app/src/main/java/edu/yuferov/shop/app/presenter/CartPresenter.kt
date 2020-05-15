@@ -33,23 +33,25 @@ class CartPresenter @Inject constructor(
     }
 
     fun onRemoveItemClicked(cartItem: CartItem) {
-        val index = cart.items.indexOf(cartItem)
-        cart.items.remove(cartItem)
-        viewState.removeItem(index)
-        updateButton()
-        viewState.showItemRemovedMessage(index, cartItem)
-        mainPresenter.updateItemsCount()
-
-        presenterScope.launch { repository.save(cart) }
+        presenterScope.launch {
+            repository.save(cart)
+            val index = cart.items.indexOf(cartItem)
+            cart.items.remove(cartItem)
+            viewState.removeItem(index)
+            updateButton()
+            viewState.showItemRemovedMessage(index, cartItem)
+            mainPresenter.updateItemsCount()
+        }
     }
 
     fun onRestoreItemClicked(index: Int, cartItem: CartItem) {
-        cart.items.add(index, cartItem)
-        viewState.insertItem(index)
-        updateButton()
-        mainPresenter.updateItemsCount()
-
-        presenterScope.launch { repository.save(cart) }
+        presenterScope.launch {
+            repository.save(cart)
+            cart.items.add(index, cartItem)
+            viewState.insertItem(index)
+            updateButton()
+            mainPresenter.updateItemsCount()
+        }
     }
 
     private fun updateButton() {
