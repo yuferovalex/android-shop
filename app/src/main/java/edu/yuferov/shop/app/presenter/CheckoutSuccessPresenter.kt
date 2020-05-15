@@ -5,5 +5,15 @@ import moxy.MvpPresenter
 import javax.inject.Inject
 
 @InjectViewState
-class CheckoutSuccessPresenter @Inject constructor() : BasePresenter<ICheckoutSuccessView>()  {
+class CheckoutSuccessPresenter(
+    private val orderNumber: Int
+) : MvpPresenter<ICheckoutSuccessView>()  {
+
+    class Fabric @Inject constructor() {
+        fun create(orderNumber: Int) = CheckoutSuccessPresenter(orderNumber)
+    }
+
+    init {
+        viewState.setOrderNumber(orderNumber)
+    }
 }

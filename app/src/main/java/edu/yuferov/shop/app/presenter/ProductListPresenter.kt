@@ -12,14 +12,16 @@ import javax.inject.Inject
 class ProductListPresenter(
     private val api: MainApi,
     private val repository: CartRepository,
+    private val mainPresenter: MainPresenter,
     private val categoryId: Int
 ) : BasePresenter<IProductListView>() {
 
     class Fabric @Inject constructor(
         private val api: MainApi,
+        private val mainPresenter: MainPresenter,
         private val repository: CartRepository
     ) {
-        fun create(categoryId: Int) = ProductListPresenter(api, repository, categoryId)
+        fun create(categoryId: Int) = ProductListPresenter(api, repository, mainPresenter, categoryId)
     }
 
     init {
@@ -31,6 +33,7 @@ class ProductListPresenter(
 
     fun onAddToCardClicked(product: Product) = presenterScope.launch {
         repository.add(product.id, 1)
+        mainPresenter.updateItemsCount()
     }
 
     fun onProductDetailsRequested(product: Product) =

@@ -23,5 +23,9 @@ class Cart(
             }
         )
 
+    val totalItemsCount
+        get() = items.fold(0) {
+                acc, cartItem -> acc + cartItem.quantity
+        }
 }
 

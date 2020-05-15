@@ -17,11 +17,12 @@ import javax.inject.Inject
 class CheckoutFormPresenter @Inject constructor(
     private val cartRepository: CartRepository,
     private val userInfoRepository: UserInfoRepository,
-    private val api: MainApi
+    private val api: MainApi,
+    private val mainPresenter: MainPresenter
 ) : BasePresenter<ICheckoutFormView>() {
 
-    lateinit var cart: Cart
-    lateinit var userInfo: UserInfo
+    private lateinit var cart: Cart
+    private lateinit var userInfo: UserInfo
 
     init {
         makeRequest {
@@ -67,9 +68,10 @@ class CheckoutFormPresenter @Inject constructor(
             return
         }
         val request = OrderRequest(cart, userInfo)
-        presenterScope.launch {
+        makeRequest {
             val number = api.createOrder(request)
             cartRepository.clear()
+            mainPresenter.updateItemsCount()
             viewState.navigateToSuccess(number)
         }
     }
@@ -87,7 +89,20 @@ class CheckoutFormPresenter @Inject constructor(
         result = result && msg == 0
         viewState.setMiddleNameError(msg)
 
+        msg = validatePhone(userInfo.phone)
+        result = result && msg == 0
+        viewState.setPhoneError(msg)
+
         return result
+    }
+
+    private fun validatePhone(phone: String): Int {
+        val phoneNumberCount = phone.count { !" +-".contains(it) }
+        if (phoneNumberCount != 11) {
+            return R.string.phone_must_contains_eleven_numbers
+        }
+
+        return 0
     }
 
     private fun validateName(name: String, required: Boolean = true): Int {
@@ -99,7 +114,5 @@ class CheckoutFormPresenter @Inject constructor(
         }
         return 0
     }
-
-
 
 }

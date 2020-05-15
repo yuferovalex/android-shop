@@ -34,4 +34,6 @@
     <string name="fragment_cart_fragment_item_removed_msg">Продукт %1$s был удален из корзины</string>
     <string name="field_can_not_be_empty_error">Поле не может быть пустым</string>
     <string name="field_contains_invalid_characters_error">Поле должно содержать только буквы</string>
+    <string name="your_order_number">Номер вашего заказа</string>
+    <string name="phone_must_contains_eleven_numbers">Телефон должен содержать ровно 11 цифр</string>
 </resources>

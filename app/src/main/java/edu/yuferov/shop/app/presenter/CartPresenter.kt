@@ -10,7 +10,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class CartPresenter @Inject constructor(
-    private val repository: CartRepository
+    private val repository: CartRepository,
+    private val mainPresenter: MainPresenter
 ) : BasePresenter<ICartView>() {
 
     private lateinit var cart: Cart
@@ -37,6 +38,7 @@ class CartPresenter @Inject constructor(
         viewState.removeItem(index)
         updateButton()
         viewState.showItemRemovedMessage(index, cartItem)
+        mainPresenter.updateItemsCount()
 
         presenterScope.launch { repository.save(cart) }
     }
@@ -45,6 +47,7 @@ class CartPresenter @Inject constructor(
         cart.items.add(index, cartItem)
         viewState.insertItem(index)
         updateButton()
+        mainPresenter.updateItemsCount()
 
         presenterScope.launch { repository.save(cart) }
     }
@@ -65,6 +68,7 @@ class CartPresenter @Inject constructor(
         val index = cart.items.indexOf(cartItem)
         viewState.updateItem(index)
         updateButton()
+        mainPresenter.updateItemsCount()
     }
 
     fun onQuantityDialogCancelClicked(cartItem: CartItem, initialQuantity: Int) {
@@ -76,6 +80,7 @@ class CartPresenter @Inject constructor(
         viewState.updateItem(index)
         updateButton()
         viewState.hideQuantityDialog()
+        mainPresenter.updateItemsCount()
     }
 
     fun onQuantityClick(cartItem: CartItem) {

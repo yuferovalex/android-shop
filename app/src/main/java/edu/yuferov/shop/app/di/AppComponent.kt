@@ -1,6 +1,7 @@
 package edu.yuferov.shop.app.di
 
 import dagger.Component
+import edu.yuferov.shop.app.activity.MainActivity
 import edu.yuferov.shop.app.fragment.*
 import javax.inject.Singleton
 
@@ -8,7 +9,8 @@ import javax.inject.Singleton
     modules = [
         NetworkModule::class,
         RepositoryModule::class,
-        MainModule::class
+        MainModule::class,
+        PresenterModule::class
     ]
 )
 @Singleton
@@ -20,6 +22,7 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
+    fun inject(mainActivity: MainActivity)
     fun inject(catalogFragment: CatalogFragment)
     fun inject(catalogFragment: ProductListFragment)
     fun inject(productDetailFragment: ProductDetailFragment)
